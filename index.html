@@ -32,6 +32,29 @@ body.presenting header,body.presenting nav,body.presenting .progress,body.presen
 @media(max-width:560px){header{padding:.65rem .8rem}.brand{font-size:.88rem}.brand img{width:30px;height:30px}.header-actions .btn{padding:.45rem .6rem;font-size:.75rem}.header-actions .hide-mobile{display:none}main{padding:0 1rem}section{min-height:auto;padding:4.5rem 0}h1{font-size:clamp(2.5rem,14vw,4rem)}.grid,.grid.two{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.source{align-items:flex-start;flex-direction:column}nav{display:none}.progress{top:57px}.hero-art{display:none}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 @media print{body{background:#fff;color:#111}header,nav,.progress,.slide-controls{display:none!important}main{max-width:none;padding:0 1cm}section{min-height:0;page-break-after:always;padding:1.2cm 0;border-bottom:1px solid #ccc}.card,details,.source{background:#fff;border-color:#bbb;color:#111;break-inside:avoid}.card p,.muted,.lead,td,.detail-body{color:#333}h1 span,.accent,.big-number{color:#007b8a}.hero:after,.hero-art{display:none}.tag{color:#111;border-color:#888;background:#fff}a{color:#005d68}}
+
+/* Contenedores colapsables para los 10 módulos */
+.module-accordion{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1.7rem}
+.module-card{position:relative;isolation:isolate;border:1px solid #203447;border-radius:18px;background:linear-gradient(145deg,#101a27,#080d14);overflow:hidden;transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}
+.module-card:before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--perimeter-angle,0deg),transparent 0 72%,var(--cyan) 79%,var(--mag) 86%,transparent 93%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;pointer-events:none;z-index:2}
+.module-card:hover:before,.module-card:focus-within:before{opacity:1;animation:perimeter-run 2.8s linear infinite}
+.module-card:hover,.module-card:focus-within{transform:translateY(-3px);border-color:#00eaff55;box-shadow:0 12px 32px #00eaff10}
+@keyframes perimeter-run{to{--perimeter-angle:360deg}}
+@property --perimeter-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
+.module-toggle{position:relative;z-index:1;display:grid;grid-template-columns:44px 1fr 28px;gap:.85rem;align-items:center;width:100%;text-align:left;border:0;background:transparent;color:var(--text);padding:1.1rem 1.15rem;min-height:82px}
+.module-number{width:40px;height:40px;display:grid;place-items:center;border:1px solid #00eaff55;border-radius:12px;color:var(--cyan);font-weight:850;background:#00eaff0b}
+.module-heading{font-weight:800;line-height:1.25}.module-subtitle{display:block;color:var(--muted);font-size:.78rem;font-weight:450;margin-top:.3rem}
+.module-chevron{color:var(--cyan);font-size:1.2rem;transition:transform .28s ease;text-align:center}
+.module-toggle[aria-expanded="true"] .module-chevron{transform:rotate(180deg)}
+.module-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease,opacity .25s ease;opacity:0}
+.module-panel.open{grid-template-rows:1fr;opacity:1}
+.module-panel-inner{overflow:hidden;min-height:0;padding:0 1.15rem;color:var(--muted);transition:padding .32s ease}
+.module-panel.open .module-panel-inner{padding:0 1.15rem 1.25rem}
+.module-panel-inner p{margin:0 0 .7rem}.module-panel-inner p:last-child{margin-bottom:0}
+.module-panel-inner strong{color:#edfaff}.module-panel-inner ul{margin:.5rem 0 0;padding-left:1.2rem}.module-panel-inner li{margin:.35rem 0}
+@media(max-width:700px){.module-accordion{grid-template-columns:1fr}.module-toggle{min-height:74px}}
+@media(prefers-reduced-motion:reduce){.module-card,.module-panel,.module-panel-inner,.module-chevron{transition:none!important}.module-card:hover:before,.module-card:focus-within:before{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -62,6 +85,55 @@ body.presenting header,body.presenting nav,body.presenting .progress,body.presen
     </div>
     <div class="hero-art" aria-hidden="true"><div class="orb">✳</div></div>
   </div>
+</section>
+
+<section id="mapa-modulos">
+  <div class="kicker">Mapa de la presentación</div>
+  <h2>Diez módulos. Una visión compartida.</h2>
+  <p class="lead">Abre cada contenedor para consultar el objetivo y los contenidos clave. Al pasar el cursor, una línea luminosa recorre suavemente el perímetro para destacar el módulo activo.</p>
+  <div class="module-accordion" id="moduleAccordion">
+    <article class="module-card">
+      <button class="module-toggle" aria-expanded="false" aria-controls="module-panel-1" id="module-toggle-1"><span class="module-number">01</span><span class="module-heading">Apertura memorable<span class="module-subtitle">Visión, identidad y propósito</span></span><span class="module-chevron">⌄</span></button>
+      <div class="module-panel" id="module-panel-1" role="region" aria-labelledby="module-toggle-1"><div class="module-panel-inner"><p><strong>Idea central:</strong> el futuro de la IA también se construye en el sur.</p><p>Presentar el Primer Congreso de Inteligencia Artificial del Sur de Chile, Osorno 2027, impulsado por DataFlowIA, con una invitación a conectar personas, conocimiento y oportunidades regionales.</p></div></div>
+    </article>
+    <article class="module-card">
+      <button class="module-toggle" aria-expanded="false" aria-controls="module-panel-2" id="module-toggle-2"><span class="module-number">02</span><span class="module-heading">El cambio que vivimos<span class="module-subtitle">Oportunidades y desafíos de la IA</span></span><span class="module-chevron">⌄</span></button>
+      <div class="module-panel" id="module-panel-2" role="region" aria-labelledby="module-toggle-2"><div class="module-panel-inner"><p><strong>Objetivo:</strong> explicar por qué la IA es relevante hoy, en un lenguaje accesible.</p><ul><li>Educación, empresas y sociedad.</li><li>Oportunidades prácticas y límites.</li><li>Uso responsable, verificación y supervisión humana.</li></ul></div></div>
+    </article>
+    <article class="module-card">
+      <button class="module-toggle" aria-expanded="false" aria-controls="module-panel-3" id="module-toggle-3"><span class="module-number">03</span><span class="module-heading">¿Por qué Osorno?<span class="module-subtitle">Territorio y desarrollo regional</span></span><span class="module-chevron">⌄</span></button>
+      <div class="module-panel" id="module-panel-3" role="region" aria-labelledby="module-toggle-3"><div class="module-panel-inner"><p><strong>Objetivo:</strong> situar la oportunidad en el contexto regional.</p><ul><li>Conectar talento, empresas e instituciones.</li><li>Acercar el conocimiento fuera de los grandes centros.</li><li>Plantear a Osorno como referente emergente, no como logro ya consolidado.</li></ul></div></div>
+    </article>
+    <article class="module-card">
+      <button class="module-toggle" aria-expanded="false" aria-controls="module-panel-4" id="module-toggle-4"><span class="module-number">04</span><span class="module-heading">La propuesta del congreso<span class="module-subtitle">Propósito, públicos y diferenciación</span></span><span class="module-chevron">⌄</span></button>
+      <div class="module-panel" id="module-panel-4" role="region" aria-labelledby="module-toggle-4"><div class="module-panel-inner"><p><strong>Objetivo:</strong> mostrar una experiencia que va más allá de una conferencia técnica.</p><ul><li>Charlas, talleres y demostraciones.</li><li>Aprendizaje práctico y participación transversal.</li><li>Conexión entre conocimiento y necesidades reales.</li></ul></div></div>
+    </article>
+    <article class="module-card">
+      <button class="module-toggle" aria-expanded="false" aria-controls="module-panel-5" id="module-toggle-5"><span class="module-number">05</span><span class="module-heading">Experiencias y contenidos<span class="module-subtitle">Aprender, experimentar y crear</span></span><span class="module-chevron">⌄</span></button>
+      <div class="module-panel" id="module-panel-5" role="region" aria-labelledby="module-toggle-5"><div class="module-panel-inner"><p><strong>Contenidos posibles:</strong></p><ul><li>Aplicaciones para empresas y PYMES.</li><li>Educación y formación docente.</li><li>Innovación, productividad y emprendimiento.</li><li>Laboratorios, demostraciones y espacios participativos.</li></ul></div></div>
+    </article>
+    <article class="module-card">
+      <button class="module-toggle" aria-expanded="false" aria-controls="module-panel-6" id="module-toggle-6"><span class="module-number">06</span><span class="module-heading">Ecosistema colaborativo<span class="module-subtitle">Aliados y roles potenciales</span></span><span class="module-chevron">⌄</span></button>
+      <div class="module-panel" id="module-panel-6" role="region" aria-labelledby="module-toggle-6"><div class="module-panel-inner"><p><strong>Objetivo:</strong> invitar a instituciones, empresas, gremios, centros educativos y comunidad tecnológica.</p><p>Distinguir organizaciones potenciales, contactadas, interesadas y confirmadas. No comunicar compromisos que no estén documentados.</p></div></div>
+    </article>
+    <article class="module-card">
+      <button class="module-toggle" aria-expanded="false" aria-controls="module-panel-7" id="module-toggle-7"><span class="module-number">07</span><span class="module-heading">Modelo preliminar del evento<span class="module-subtitle">Formato, aforo y experiencia</span></span><span class="module-chevron">⌄</span></button>
+      <div class="module-panel" id="module-panel-7" role="region" aria-labelledby="module-toggle-7"><div class="module-panel-inner"><p><strong>Supuestos de planificación:</strong> dos jornadas, aforo de referencia de 250 asistentes y posible participación de expositores de Santiago.</p><p>La sede, fechas, logística y programa definitivo siguen pendientes de validación.</p></div></div>
+    </article>
+    <article class="module-card">
+      <button class="module-toggle" aria-expanded="false" aria-controls="module-panel-8" id="module-toggle-8"><span class="module-number">08</span><span class="module-heading">Recursos y viabilidad<span class="module-subtitle">Presupuesto y financiamiento</span></span><span class="module-chevron">⌄</span></button>
+      <div class="module-panel" id="module-panel-8" role="region" aria-labelledby="module-toggle-8"><div class="module-panel-inner"><p><strong>Objetivo:</strong> construir un modelo financiero transparente.</p><ul><li>Operación, producción y logística.</li><li>Marketing y comunicaciones.</li><li>Patrocinios, aportes y entradas.</li><li>Conciliar las estimaciones preliminares antes de solicitar financiamiento.</li></ul></div></div>
+    </article>
+    <article class="module-card">
+      <button class="module-toggle" aria-expanded="false" aria-controls="module-panel-9" id="module-toggle-9"><span class="module-number">09</span><span class="module-heading">Impacto esperado<span class="module-subtitle">Indicadores y continuidad</span></span><span class="module-chevron">⌄</span></button>
+      <div class="module-panel" id="module-panel-9" role="region" aria-labelledby="module-toggle-9"><div class="module-panel-inner"><p><strong>Indicadores propuestos:</strong> participación, satisfacción, aprendizaje, casos de aplicación, alianzas y actividades posteriores.</p><p>Las metas cuantitativas deben acordarse antes del evento y medirse; no se presentan resultados anticipados como hechos.</p></div></div>
+    </article>
+    <article class="module-card">
+      <button class="module-toggle" aria-expanded="false" aria-controls="module-panel-10" id="module-toggle-10"><span class="module-number">10</span><span class="module-heading">Invitación y cierre<span class="module-subtitle">De la conversación a la acción</span></span><span class="module-chevron">⌄</span></button>
+      <div class="module-panel" id="module-panel-10" role="region" aria-labelledby="module-toggle-10"><div class="module-panel-inner"><p><strong>Invitación:</strong> constituir una mesa de trabajo, acordar responsables y validar alcance, calendario y presupuesto.</p><p><strong>Mensaje de cierre:</strong> Osorno puede comenzar a construir su futuro tecnológico conectando personas, conocimiento, empresas e instituciones.</p></div></div>
+    </article>
+  </div>
+  <p class="hint">Consejo: usa Tab para recorrer los módulos y Enter o Espacio para abrirlos. El efecto visual respeta la preferencia de movimiento reducido del dispositivo.</p>
 </section>
 
 <section id="momento">
@@ -245,6 +317,18 @@ sections.forEach((s,i)=>{const a=document.createElement('a');a.href='#'+s.id;a.t
 const dots=[...nav.querySelectorAll('a')];
 function updateProgress(){const max=document.documentElement.scrollHeight-innerHeight;document.getElementById('progressBar').style.width=(max>0?(scrollY/max)*100:0)+'%';let idx=0;sections.forEach((s,i)=>{if(s.getBoundingClientRect().top<innerHeight*.48)idx=i});dots.forEach((d,i)=>d.classList.toggle('active',i===idx))}
 window.addEventListener('scroll',updateProgress,{passive:true});window.addEventListener('resize',updateProgress);updateProgress();
+
+// Contenedores colapsables: animación suave y controles accesibles.
+document.querySelectorAll('.module-toggle').forEach(button=>{
+  button.addEventListener('click',()=>{
+    const panel=document.getElementById(button.getAttribute('aria-controls'));
+    const opening=button.getAttribute('aria-expanded')!=='true';
+    button.setAttribute('aria-expanded',String(opening));
+    panel.classList.toggle('open',opening);
+    panel.setAttribute('aria-hidden',String(!opening));
+  });
+});
+
 function currentSection(){let idx=0;sections.forEach((s,i)=>{if(Math.abs(s.getBoundingClientRect().top)<Math.abs(sections[idx].getBoundingClientRect().top))idx=i});return idx}
 function goSection(delta){const idx=Math.max(0,Math.min(sections.length-1,currentSection()+delta));sections[idx].scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
 function togglePresentation(){document.body.classList.toggle('presenting');const on=document.body.classList.contains('presenting');document.getElementById('presentBtn').textContent=on?'✕ Salir':'⛶ Presentar';if(on)sections[currentSection()].scrollIntoView({behavior:'auto'});}
